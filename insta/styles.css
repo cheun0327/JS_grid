@@ -1,0 +1,88 @@
+:root{
+    --mainMargin: calc((100vw - 1000px)/2);
+    --navHeight: 60px;
+    --navColor: white;
+    --profileColor: #AAABD3;
+    --storisColor: #CBA6C3;
+    --feedContainerColor: #CBA6C3;
+}
+/*media 쿼리는 맨마지막에 작성*/
+@custom-media --lg-size (max-width:1000px);
+@custom-media --md-size (max-width:850px);
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+nav{
+    height: var(--navHeight);
+    background-color: var(--navColor);
+    border-bottom: 1px solid gray;
+    position: fixed;
+    width: 100vw;
+}
+
+main{
+    /*줄일수록 마진 작게 하다가 100px되면 마진x*/
+    /*넓이 900px되면 마진 - 되어서 점점 커진다=>media 쿼리로 해결*/
+    margin: 0 var(--mainMargin);
+}
+
+.profile{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding-top: var(--navHeight); /*nav fixed해서 profile의 시작점 수정*/
+    height: 250px;
+    background-color: var(--profileColor);
+}
+
+.flexbox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    background-color: pink;
+    margin: 10px;
+}
+
+.stories{
+    height: 150px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    background-color: var(--storisColor);
+}
+
+.control-bar{
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    background-color: var(--profileColor);
+    justify-content: center;
+}
+
+.feed-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: var(--feedContainerColor);
+}
+
+.feed{
+    height: 300px;
+}
+
+@media(--lg-size){
+    main{
+        /*margin있으면 스크롤바 생기게 된다*/
+        margin:0;
+    }
+}
+
+@media(--md-size){
+    .profile{
+        grid-template-columns: unset; /*이전의 col지정을 삭제*/
+        grid-template-rows: 1fr 2fr;
+    }
+    .feed{
+        height: 32vw;
+    }
+}
